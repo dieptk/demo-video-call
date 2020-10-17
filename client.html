@@ -1,0 +1,40 @@
+<!doctype html>
+<html>
+    <head>
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+        <style>
+            html, body { 
+                background-color: #333; 
+            }
+            video {
+                width:  320px;
+                height:  240px;
+                border:  1px solid black;
+            }
+        </style>
+        <script>
+            function uuidv4() {
+                return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+                    var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
+                    return v.toString(16);
+                });
+            }
+            function createRoom(ev) {
+                if ($(ev).prev().val()  == '') return false
+                window.location.href = '/video-call?room=' + uuidv4() + '&name=' + $(ev).prev().val();
+            }           
+        </script>
+    </head>
+    <body>
+        <div style="float: left;width: 100%;height: 100vh;display: flex;">
+            <div style="width: 300px;margin: auto;background: #fff;padding: 20px;border-radius: 5px;">
+                <input type="text" style="height: 35px;width: 199px;" placeholder="Enter room name">
+                <button style="line-height: 35px;background: #009688;border: 1px solid #009688;color: #fff;border-radius: 3px;cursor: pointer;text-align: center;" onclick="createRoom(this)">Create room</button>
+            </div>   
+        </div>
+        <!-- 
+        the <video> and <audio> tags are all added and removed dynamically
+        in 'onAddStream', 'setup_local_media', and 'removePeer'/'disconnect'
+        -->
+    </body>
+</html>
